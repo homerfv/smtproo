@@ -46,7 +46,7 @@ Donate
 -----------
 If you find SMTProo useful, please consider supporting by making a donation. Any amount will greatly appreciated.
 
-<a href="https://www.paypal.me/homervillanueva" rel="nofollow" target="_blank">
+<a href="https://www.paypal.me/homerfv" rel="nofollow" target="_blank">
 <img alt="Donate" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" style="max-width:100%;">
 </a> 
 

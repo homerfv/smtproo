@@ -17,7 +17,7 @@ Java 8
 Usage
 ------------
 
-You can run the SMTP server using the following command line. 
+You can run the SMTP server using the following command. 
 
 ```
 java -jar smtproo-VERSION-SNAPSHOT.jar
@@ -25,8 +25,8 @@ java -jar smtproo-VERSION-SNAPSHOT.jar
 
 By default the SMTP server will listen on port 2525 and the web interface will listent on port 8080.
 
-To view/download received emails, open up browser and then hit http://localhost:8080. 
-By default you will be redirected to http://localhost:8080?dir=YYYYMMDD which dir value corresponds to current date.
+To view/download received emails, open up browser and then hit ``http://localhost:8080``. 
+By default you will be redirected to ``http://localhost:8080?dir=YYYYMMDD`` which dir value corresponds to current date.
 Alternatively, you may change the value of dir paramter to view emails sent on other dates.
 
 If downloaded email is not rendering properly, you may need to override default JVM line.separator. 
@@ -54,7 +54,7 @@ Execute the following maven command to build the jar file
 mvn -clean install
 ```
 
-After successful compilation, look for target/smtproo-VERSION-SNAPSHOT.jar
+After successful compilation, look for ``target/smtproo-VERSION-SNAPSHOT.jar``
 
 
 Donate

@@ -3,7 +3,7 @@
 SMTProo is a stand alone SMTP server for development testing with a very simple web interface.
 Written purely in Java using SpringBoot 2.1.0, jQuery and Bootstrap framework.
 
-  <img src="https://raw.githubusercontent.com/homerfv/smtproo/master/src/main/resources/static/images/web.png" width="664" height="463" />
+  <img src="https://raw.githubusercontent.com/homerfv/smtproo/master/src/main/resources/static/images/web.png" />
 
 Requirements
 ------------

@@ -25,9 +25,12 @@ java -jar smtproo-VERSION-SNAPSHOT.jar
 
 By default the SMTP server will listen on port 2525 and the web interface will listent on port 8080.
 
+Configure your application SMTP setting to ``localhost:2525`` and start sending test emails.
+
 To view/download received emails, open up browser and then hit ``http://localhost:8080``. 
-By default you will be redirected to ``http://localhost:8080?dir=YYYYMMDD`` which dir value corresponds to current date.
-Alternatively, you may change the value of dir paramter to view emails sent on other dates.
+
+By default you will be redirected to ``http://localhost:8080?dir=YYYYMMDD`` which ``dir`` value corresponds to current date.
+Alternatively, you may change the value of ``dir`` paramter to view emails sent on other dates.
 
 If downloaded email is not rendering properly, you may need to override default JVM line.separator. 
 
@@ -38,17 +41,15 @@ java -Dline.separator=$'\r\n' -jar smtproo-VERSION-SNAPSHOT.jar
 If you wish to change the default setting, you may override the default values via command line arguments.
 
 ```
-java -Dsmtpserver.host=127.0.0.1 -Dsmtpserver.port=2526 -Dsmtpserver.maildir=received -jar \
-  -Dserver.port=8090 smtproo-VERSION-SNAPSHOT.jar	
+java -Dsmtpserver.host=127.0.0.1 -Dsmtpserver.port=2526 -Dsmtpserver.maildir=received \
+-Dserver.port=8090 -jar smtproo-VERSION-SNAPSHOT.jar	
 ```
 
 
 How to build
 ------------
 
-Use maven to compile and build
-
-Execute the following maven command to build the jar file
+Use maven to compile and build. Execute the following maven command to build the jar file.
 
 ```  
 mvn -clean install

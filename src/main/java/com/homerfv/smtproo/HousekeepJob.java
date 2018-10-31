@@ -33,6 +33,9 @@ public class HousekeepJob extends QuartzJobBean {
 	@Autowired
 	SMTPServerService smtpService;
 	
+	@Value("${housekeep.enabled}")
+	String enabled = "";
+	
 	@Value("${housekeep.retention}")
 	String retention = "";
 	
@@ -53,41 +56,47 @@ public class HousekeepJob extends QuartzJobBean {
 		LOGGER.info("dirPath: "+dirPath);
 		try {
 			
-			
-			if(StringUtils.isEmpty(dirPath)) {
-				throw new Exception("mail dir path is empty");
+			if("true".equals(StringUtils.trim(enabled))){
+				
+				if(StringUtils.isEmpty(dirPath)) {
+					throw new Exception("mail dir path is empty");
+				}
+				File mailDir = new File(dirPath);
+				List<File> files = (List<File>) FileUtils.listFilesAndDirs(mailDir, 
+							TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
+				
+				File[] listOfFolder = new File[files.size()];
+				listOfFolder = files.toArray(listOfFolder);
+				Arrays.sort(listOfFolder, new Comparator<File>() {
+					public int compare(File f1, File f2) {
+						return Long.compare(f2.lastModified(),f1.lastModified());
+					}
+				});
+				
+				LOGGER.info("days retention from config: "+retention);
+				int days = Integer.parseInt(StringUtils.trim(retention)) * -1;
+				
+				Calendar calendar = Calendar.getInstance();
+				calendar.add(Calendar.DAY_OF_MONTH, days);
+				Date daysAgo = calendar.getTime();
+				LOGGER.info("Deleting files older than "+daysAgo);
+				
+				LOGGER.info("found "+listOfFolder.length+" file items");
+				for (File file : listOfFolder) {
+					if(file.lastModified() < daysAgo.getTime()) {
+						LOGGER.info("Deleting "+file.getPath()+" => "+new Date(file.lastModified()));
+						FileUtils.forceDelete(file);
+					}
+					if(file.isDirectory() && file.list().length == 0){
+						LOGGER.info("Deleteing empty directory "+file.getPath());
+						FileUtils.forceDelete(file);
+					}
+				}
+			}else {
+				LOGGER.info("Housekeeping batch job is disabled from setting");
 			}
-			File mailDir = new File(dirPath);
-			List<File> files = (List<File>) FileUtils.listFilesAndDirs(mailDir, 
-						TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE);
 			
-			File[] listOfFolder = new File[files.size()];
-			listOfFolder = files.toArray(listOfFolder);
-			Arrays.sort(listOfFolder, new Comparator<File>() {
-				public int compare(File f1, File f2) {
-					return Long.compare(f2.lastModified(),f1.lastModified());
-				}
-			});
 			
-			LOGGER.info("days retention from config: "+retention);
-			int days = Integer.parseInt(StringUtils.trim(retention)) * -1;
-			
-			Calendar calendar = Calendar.getInstance();
-			calendar.add(Calendar.DAY_OF_MONTH, days);
-			Date daysAgo = calendar.getTime();
-			LOGGER.info("Deleting files older than "+daysAgo);
-			
-			LOGGER.info("found "+listOfFolder.length+" file items");
-			for (File file : listOfFolder) {
-				if(file.lastModified() < daysAgo.getTime()) {
-					LOGGER.info("Deleting "+file.getPath()+" => "+new Date(file.lastModified()));
-					FileUtils.forceDelete(file);
-				}
-				if(file.isDirectory() && file.list().length == 0){
-					LOGGER.info("Deleteing empty directory "+file.getPath());
-					FileUtils.forceDelete(file);
-				}
-			}
 			
 		}catch(Exception e) {
 			LOGGER.error("",e.getMessage());

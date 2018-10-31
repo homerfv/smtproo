@@ -101,6 +101,16 @@ public class SMTPServerService{
 	public boolean isRunning() {
 		return smtpServer.isRunning();
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getMaildir() {
+		return maildir;
+	}
+	
+	
 	
 
 }

@@ -80,16 +80,16 @@ public class SimpleMessageListenerImpl implements SimpleMessageListener {
 		
 		String yyyyMMdd = dateFormatDir.format(new Date());
 		
-		String dirPath = String.format("%s%s%s", this.getDirPath(), 
+		String dirPathDay = String.format("%s%s%s", this.getDirPath(), 
 								File.separator,yyyyMMdd);
 								
-		File dir = new File(dirPath);
+		File dir = new File(dirPathDay);
 		if(!dir.exists()){
 			if(!dir.mkdirs()) {
-				LOGGER.error("Unable to create directory "+dirPath);
+				LOGGER.error("Unable to create directory "+dirPathDay);
 			}
 		}else {
-			LOGGER.info("Directory "+dirPath+" already exist..");
+			LOGGER.info("Directory "+dirPathDay+" already exist..");
 		}
 		
 		String filePath = String.format("%s%s%s", dirPath, 

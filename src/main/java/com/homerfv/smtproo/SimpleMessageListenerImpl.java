@@ -92,7 +92,7 @@ public class SimpleMessageListenerImpl implements SimpleMessageListener {
 			LOGGER.info("Directory "+dirPathDay+" already exist..");
 		}
 		
-		String filePath = String.format("%s%s%s", dirPath, 
+		String filePath = String.format("%s%s%s", dirPathDay, 
 											File.separator,
 											dateFormatFile.format(new Date()));
 

@@ -89,9 +89,10 @@ public class SMTPServerService{
 	@PreDestroy
 	public void stop() {
 
-		LOGGER.info("****** Stopping SMTP Server for domain "+smtpServer.getHostName()+" on port "+smtpServer.getPort());
-		smtpServer.stop();
-		
+		if(this.isRunning()) {
+			LOGGER.info("****** Stopping SMTP Server for domain "+smtpServer.getHostName()+" on port "+smtpServer.getPort());
+			smtpServer.stop();
+		}
 	}
 
 	/**

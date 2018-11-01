@@ -132,6 +132,14 @@
 	    }
 	});
 		
-	</script>		
+	</script>
+	<div id="footer">
+         <div class="container text-center">
+            <p class="text-muted credit">
+                <p>Copyright © <span id="cp_year">20XX</span> <a href="https://github.com/homerfv/smtproo" target="_blank">SMTProo</a> · Open Source</p>
+                <script>$("#cp_year").html(new Date().getFullYear())</script>
+            </p>
+          </div>
+    </div>		
   </body>
 </html>
